@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>JF Workbench 2.7.0 · Windows x64 作钓工作台</title>
+  <meta name="description" content="JF Workbench 作钓工作台，集作钓控制、鱼获筛选、17 张水域地图、钓点收藏、三杆状态与数据记录于一处。探索功能、界面与两套快捷键方案。">
+  <meta name="theme-color" content="#1f3a45">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JF Workbench 2.7.0 · 作钓工作台">
+  <meta property="og:description" content="作钓控制、水域地图、三杆状态与数据记录，一个工作台就能井然有序。">
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="icon" href="assets/icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <div class="backdrop" aria-hidden="true">
+    <svg class="waves" viewBox="0 0 1440 960" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <path id="wave-line" d="M-200 0C-20-34 140-34 320 0S660 34 840 0 1180-34 1360 0 1700 34 1880 0"/>
+      </defs>
+      <g transform="rotate(-7 720 480)">
+        <use href="#wave-line" x="0" y="-40"/>
+        <use href="#wave-line" x="-260" y="40"/>
+        <use href="#wave-line" x="0" y="120"/>
+        <use href="#wave-line" x="-260" y="200"/>
+        <use href="#wave-line" x="0" y="280"/>
+        <use href="#wave-line" x="-260" y="360"/>
+        <use href="#wave-line" x="0" y="440"/>
+        <use href="#wave-line" x="-260" y="520"/>
+        <use href="#wave-line" x="0" y="600"/>
+        <use href="#wave-line" x="-260" y="680"/>
+        <use href="#wave-line" x="0" y="760"/>
+        <use href="#wave-line" x="-260" y="840"/>
+        <use href="#wave-line" x="0" y="920"/>
+        <use href="#wave-line" x="-260" y="1000"/>
+      </g>
+    </svg>
+  </div>
+
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.8"/></symbol>
+    <symbol id="i-hook" viewBox="0 0 24 24"><circle cx="15" cy="4" r="1.6"/><path d="M15 5.6V14a5 5 0 0 1-10 0v-2.2"/><path d="m5 11.8 2.4 2.2"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M6 4v5M6 13v7M12 4v9M12 17v3M18 4v3M18 11v9"/><circle cx="6" cy="11" r="2"/><circle cx="12" cy="15" r="2"/><circle cx="18" cy="9" r="2"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 5.5h16l-6.2 7.3v5.4l-3.6 1.8v-7.2L4 5.5z"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4.5 3.5 6.6v13l5.5-2.1 6 2.1 5.5-2.1v-13L15 6.6 9 4.5z"/><path d="M9 4.5v13M15 6.6v13"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.7-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.3 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.4"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5.2 8.5h13.6l-1.1 10.6a2 2 0 0 1-2 1.9H8.3a2 2 0 0 1-2-1.9L5.2 8.5z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M8.5 16v-4.5M12.5 16V8M16.5 16v-6.5"/></symbol>
+    <symbol id="i-toggles" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="6.5" rx="3.25"/><circle cx="7.6" cy="7.75" r="1.5"/><rect x="3" y="13" width="18" height="6.5" rx="3.25"/><circle cx="16.4" cy="16.25" r="1.5"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6.5h11M9 12h11M9 17.5h11"/><path d="M4.6 6.5h.01M4.6 12h.01M4.6 17.5h.01" stroke-width="2.6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 11v5.2"/><path d="M12 7.7h.01" stroke-width="2.6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.4"/><path d="m20 20-4.3-4.3"/></symbol>
+    <symbol id="i-window" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.6"/><path d="M3 8.8h18M7 12.8h6M7 16.2h9"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3.5 8.5 4.6-8.5 4.6-8.5-4.6L12 3.5z"/><path d="m3.5 12.4 8.5 4.6 8.5-4.6"/><path d="m3.5 16.4 8.5 4.6 8.5-4.6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.2"/><path d="M15.5 8.5V6.2A2.2 2.2 0 0 0 13.3 4H6.2A2.2 2.2 0 0 0 4 6.2v7.1a2.2 2.2 0 0 0 2.2 2.2h2.3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.3 4.3L19 7.2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13.5 6.5 19 12l-5.5 5.5"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 7.2c0-1 .8-1.7 1.7-1.7h4.1l2 2h7.5c1 0 1.7.8 1.7 1.7v8.6c0 1-.8 1.7-1.7 1.7H5.2c-1 0-1.7-.8-1.7-1.7V7.2z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.2 5 6v5.6c0 4.3 2.9 7.9 7 9.2 4.1-1.3 7-4.9 7-9.2V6l-7-2.8z"/><path d="m9.2 12.2 2 2 3.8-3.9"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3.5h6.8L19 8.7V19a1.6 1.6 0 0 1-1.6 1.6H7A1.6 1.6 0 0 1 5.4 19V5.1A1.6 1.6 0 0 1 7 3.5z"/><path d="M13.5 3.7v5.2h5.3M8.8 13h6.4M8.8 16.6h6.4"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6.5 6.5 11 11M17.5 6.5l-11 11"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M14.5 6 8.5 12l6 6"/></symbol>
+    <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2"/><path d="M9.5 3.5v3M14.5 3.5v3M9.5 17.5v3M14.5 17.5v3M3.5 9.5h3M3.5 14.5h3M17.5 9.5h3M17.5 14.5h3"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.4"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M6 4.5h10.2l3.3 3.3V18a1.5 1.5 0 0 1-1.5 1.5H6A1.5 1.5 0 0 1 4.5 18V6A1.5 1.5 0 0 1 6 4.5z"/><path d="M8 4.5V9h7V4.5M8 19.5v-6h8v6"/></symbol>
+    <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3.5v8"/><path d="M7.2 6.4a7 7 0 1 0 9.6 0"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5L8 5.5z"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1.2 1.2"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.2-1.2"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav-shell" aria-label="主导航">
+        <a class="brand" href="#top">
+          <img src="assets/icon.png" alt="" width="34" height="34">
+          <span class="brand-text"><b>JF Workbench</b><small>FISHING · WORKSPACE</small></span>
+        </a>
+        <div class="nav-links" id="nav-links">
+          <a href="#features">功能</a>
+          <a href="#workspace">功能分区</a>
+          <a href="#screens">界面</a>
+          <a href="#maps">地图</a>
+          <a href="#hotkeys">快捷键</a>
+          <a href="#insights">数据</a>
+        </div>
+        <button class="search-trigger" type="button" data-open-palette aria-label="搜索本页（Ctrl + K）">
+          <svg class="icon" width="18" height="18"><use href="#i-search"/></svg>
+          <span class="st-label">搜索功能</span>
+          <span class="st-keys" aria-hidden="true"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+        </button>
+        <button class="menu-toggle" type="button" aria-controls="nav-links" aria-expanded="false" aria-label="打开菜单">
+          <svg class="icon" width="22" height="22"><use href="#i-menu"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>FISHING WORKSPACE · v2.7.0</p>
+          <h1>JF <span class="grad">Workbench</span></h1>
+          <p class="tagline">把作钓流程、水域地图与游戏数据，<br class="br-wide">收进一个工作台。</p>
+          <p class="lead">从抛投、控饵到搏鱼与鱼获筛选，从水域选点到作钓记录，把常用功能放在顺手的位置。三杆状态随时可见，每次出钓都有条理。</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#features">探索全部功能<svg class="icon" width="18" height="18"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-ghost" href="#screens">看看工作台</a>
+          </div>
+          <ul class="hero-meta">
+            <li><svg class="icon" width="18" height="18"><use href="#i-check"/></svg>三支鱼竿，状态一目了然</li>
+            <li><svg class="icon" width="18" height="18"><use href="#i-check"/></svg>钓点收藏与作钓记录</li>
+            <li><svg class="icon" width="18" height="18"><use href="#i-check"/></svg>Ctrl + K 功能搜索</li>
+          </ul>
+        </div>
+        <div class="hero-visual">
+          <div class="shot-frame glass">
+            <img src="assets/screens/overview.png" width="1307" height="867" fetchpriority="high" alt="JF 工作台“作钓总览”页面：左侧深色导航栏，右侧是游戏连接卡片与三支鱼竿的状态卡片">
+          </div>
+          <div class="float-card float-search glass" aria-hidden="true">
+            <svg class="icon" width="18" height="18"><use href="#i-search"/></svg>
+            <span>搜索功能</span>
+            <kbd>Ctrl</kbd><kbd>K</kbd>
+          </div>
+          <div class="float-card float-status glass" aria-hidden="true">
+            <p class="fs-head"><svg class="icon" width="16" height="16"><use href="#i-window"/></svg>三杆状态窗<span>置顶</span></p>
+            <ul>
+              <li><b>1</b><i style="--w: 72%"></i></li>
+              <li><b>2</b><i style="--w: 44%"></i></li>
+              <li><b>3</b><i style="--w: 86%"></i></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-wrap" aria-label="关键数据">
+      <div class="container">
+        <ul class="stats glass reveal">
+          <li><strong data-count="11">11</strong><span>个页面</span><small>三组导航</small></li>
+          <li><strong data-count="24">24</strong><span>个用途分区</span><small>按任务组合控件</small></li>
+          <li><strong data-count="18">18</strong><span>个批量视图</span><small>统一提交草稿</small></li>
+          <li><strong data-count="76">76</strong><span>项功能控件</span><small>覆盖常用作钓需求</small></li>
+          <li><strong data-count="17">17</strong><span>张水域地图</span><small>选点与坐标换算</small></li>
+          <li><strong data-count="2">2</strong><span>套快捷键方案</span><small>按习惯自由切换</small></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">FEATURES · 核心功能</p>
+          <h2 class="section-title" id="features-title">按作钓流程组织的每一项控制</h2>
+          <p class="section-lead">下杆、控饵、搏鱼、筛选，沿着熟悉的作钓顺序找到所需功能。地图、钓点、补给与记录，也都各就其位。</p>
+        </header>
+
+        <div class="bento">
+          <article class="card glass span-2 reveal">
+            <div class="card-icon"><svg class="icon" width="22" height="22"><use href="#i-hook"/></svg></div>
+            <h3>作钓与鱼饵</h3>
+            <p>按下杆、控饵和咬口的顺序配置作钓流程：自动作钓的抛投、换饵与入护，鱼饵快速沉底与一秒沉底，目标深度与持续控饵，以及咬口阶段与鱼的行为。</p>
+            <ol class="flow-chips" aria-label="用途分区顺序">
+              <li>自动作钓</li>
+              <li>鱼饵与控深</li>
+              <li>咬口与鱼行为</li>
+            </ol>
+            <p class="card-keys"><span><kbd>Alt</kbd><kbd>E</kbd>快速沉底</span><span><kbd>Alt</kbd><kbd>Q</kbd>一秒沉底</span></p>
+          </article>
+
+          <article class="card glass reveal">
+            <div class="card-icon"><svg class="icon" width="22" height="22"><use href="#i-sliders"/></svg></div>
+            <h3>竿轮与搏鱼</h3>
+            <p>收线倍率、收线方式与入护速度放在一处；拉力档位、直接张力与竿体保护集中设置。</p>
+            <div class="tension" data-level="4">
+              <div class="tension-track" aria-hidden="true">
+                <span>不修改</span><span>20%</span><span>50%</span><span>70%</span><span>90%</span><span>100%</span>
+              </div>
+              <div class="tension-ctrl">
+                <button type="button" class="key-btn" data-step="-1" aria-label="F7：拉力档位减一"><kbd>F7</kbd>−</button>
+                <output class="tension-out" aria-live="polite">档位 4 · 70%</output>
+                <button type="button" class="key-btn" data-step="1" aria-label="F8：拉力档位加一"><kbd>F8</kbd>+</button>
+              </div>
+            </div>
+            <p class="demo-note">拉力档位交互预览</p>
+          </article>
+
+          <article class="card glass reveal">
+            <div class="card-icon"><svg class="icon" width="22" height="22"><use href="#i-filter"/></svg></div>
+            <h3>鱼获与筛选</h3>
+            <p>通用重量上下限、排除与保留名单、鱼库与逐鱼种阈值；选择鱼竿后即可手动脱钩或强制入护。</p>
+            <ul class="tags"><li>保留条件</li><li>鱼种与阈值</li><li>处理当前鱼获</li></ul>
+            <p class="card-keys"><span><kbd>Alt</kbd><kbd>3</kbd>手动脱钩</span><span><kbd>Alt</kbd><kbd>2</kbd>强制入护</span></p>
+          </article>
+
+          <article class="card glass span-2 card-map reveal">
+            <div class="card-body">
+              <div class="card-icon"><svg class="icon" width="22" height="22"><use href="#i-map"/></svg></div>
+              <h3>水域地图</h3>
+              <p>在 17 张水域地图间自由切换，查看水域细节、标记目标并换算坐标。地图校准、周边相对位置与点位收藏集中管理，确认目标后再执行移动。</p>
+              <a class="text-link" href="#maps">查看全部地图<svg class="icon" width="16" height="16"><use href="#i-arrow"/></svg></a>
+            </div>
+            <a class="map-fan" href="#maps" aria-label="前往水域地图">
+              <img src="assets/maps/3.webp" alt="" width="560" height="560" loading="lazy">
+              <img src="assets/maps/15.webp" alt="" width="560" height="560" loading="lazy">
+              <img src="assets/maps/9.webp" alt="" width="560" height="560" loading="lazy">
+            </a>
+          </article>
+
+          <article class="card glass reveal">
+            <div class="card-icon"><svg class="icon" width="22" height="22"><use href="#i-pin"/></svg></div>
+            <h3>钓点与移动</h3>
+            <p>人物与船只分别收藏钓点，可指定坐标移动或使用海图常用点；船只推进力、锁船与潜艇方式独立设置。</p>
+            <p class="card-keys"><span><kbd>Ctrl</kbd><kbd>E</kbd>锁船</span><span><kbd>Ctrl</kbd><kbd>Q</kbd>潜艇</span></p>
+          </article>
+
+          <article class="card glass reveal">
+            <div class="card-icon"><svg class="icon" width="22" height="22"><use href="#i-bag"/></svg></div>
+            <h3>交易补给</h3>
+            <p>鱼市、商店、咖啡厅、食品店与工业品入口集中管理，服务返回内容记录在服务日志中。</p>
+            <ul class="svc-keys">
+              <li><kbd>F1</kbd>鱼市</li>
+              <li><kbd>F2</kbd>商店</li>
+              <li><kbd>F3</kbd>咖啡厅</li>
+              <li><kbd>F4</kbd>食品店</li>
+              <li><kbd>F6</kbd>工业品</li>
+            </ul>
+          </article>
+
+          <article class="card glass reveal">
+            <div class="card-icon"><svg class="icon" width="22" height="22"><use href="#i-window"/></svg></div>
+            <h3>三杆状态窗</h3>
+            <p>在“设置 → 提示与状态显示”开启独立置顶的状态窗，可拖到主窗口外或另一块屏幕；主窗隐藏、最小化后仍持续刷新。</p>
+            <ul class="tags"><li>独立置顶</li><li>支持多屏</li><li>后台刷新</li></ul>
+          </article>
+
+          <article class="card glass span-2 reveal">
+            <div class="card-icon"><svg class="icon" width="22" height="22"><use href="#i-chart"/></svg></div>
+            <h3>数据与记录</h3>
+            <p>现场动态、鱼种与规则、作钓记录、订单与物资，四个页签各司其职。查看带采集时间的游戏读数，搜索历史观察，并导出 JSON / CSV。</p>
+            <div class="source-states compact" aria-label="来源状态示例">
+              <span class="state" data-state="ok">有效</span>
+              <span class="state" data-state="reading">采集中</span>
+              <span class="state" data-state="waiting">等待采集</span>
+              <span class="state" data-state="stale">过期</span>
+            </div>
+            <a class="text-link" href="#insights">了解记录功能<svg class="icon" width="16" height="16"><use href="#i-arrow"/></svg></a>
+          </article>
+
+          <article class="card glass reveal">
+            <div class="card-icon"><svg class="icon" width="22" height="22"><use href="#i-search"/></svg></div>
+            <h3>功能搜索</h3>
+            <p><kbd>Ctrl</kbd> + <kbd>K</kbd> 搜索普通控件或具体批量视图，结果保留参数上下文并显示所属页面；“前往分区”直接定位到目标卡片。</p>
+            <button type="button" class="mini-search" data-open-palette>
+              <svg class="icon" width="16" height="16"><use href="#i-search"/></svg>
+              <span>在本页试试</span>
+              <span class="st-keys" aria-hidden="true"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workspace" aria-labelledby="workspace-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">WORKSPACE · 导航结构</p>
+          <h2 class="section-title" id="workspace-title">想用的功能，都有顺手的入口</h2>
+          <p class="section-lead">作钓控制、地图与记录、工作台，三组导航串起 11 个页面。点选下方入口，看看每个页面能做什么。</p>
+        </header>
+        <div class="explorer glass reveal" id="explorer">
+          <div class="explorer-side">
+            <div class="xbrand" aria-hidden="true">
+              <span class="xbrand-badge">JF</span>
+              <span>JF 工作台<small>FISHING / WORKSPACE</small></span>
+            </div>
+            <nav class="explorer-nav" id="explorer-nav" aria-label="工作台页面"></nav>
+          </div>
+          <div class="explorer-panel" id="explorer-panel" tabindex="-1"></div>
+        </div>
+        <p class="footnote reveal">单项调整随用随改，批量设置集中应用；也可以用 Ctrl + K 搜索，直接找到对应功能。</p>
+      </div>
+    </section>
+
+    <section class="section" id="screens" aria-labelledby="screens-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">PREVIEW · 界面预览</p>
+          <h2 class="section-title" id="screens-title">熟悉的操作，一眼就能找到</h2>
+          <p class="section-lead">清晰的侧边导航，按用途排列的功能卡片，三支鱼竿的状态集中呈现。切换下方视图，看看不同任务下的工作台。</p>
+        </header>
+        <div class="gallery glass reveal">
+          <div class="gallery-tabs" id="gallery-tabs" role="tablist" aria-label="界面截图">
+            <button type="button" role="tab" id="shot-tab-overview" aria-controls="gallery-stage" aria-selected="true" data-shot="overview"
+              data-caption="作钓总览：扫描并连接游戏进程，三支鱼竿的读数与本次作钓状态集中显示。">作钓总览</button>
+            <button type="button" role="tab" id="shot-tab-fishing" aria-controls="gallery-stage" aria-selected="false" tabindex="-1" data-shot="fishing"
+              data-caption="作钓与鱼饵：下杆方式、鱼饵下沉与咬口按作钓顺序排列，单项设置随用随调。">作钓与鱼饵</button>
+            <button type="button" role="tab" id="shot-tab-insights" aria-controls="gallery-stage" aria-selected="false" tabindex="-1" data-shot="insights"
+              data-caption="数据与记录：查看三杆反馈、实时环境与提醒，汇总每次作钓中的观察。">数据与记录</button>
+            <button type="button" role="tab" id="shot-tab-services" aria-controls="gallery-stage" aria-selected="false" tabindex="-1" data-shot="services"
+              data-caption="交易补给：鱼市、商店、咖啡厅、食品店与工业品入口集中呈现，支持快捷键打开。">交易补给</button>
+            <button type="button" role="tab" id="shot-tab-narrow" aria-controls="gallery-stage" aria-selected="false" tabindex="-1" data-shot="narrow"
+              data-caption="窄窗口：导航缩为图标，内容按剩余空间重新排布。">窄窗口</button>
+          </div>
+          <div class="gallery-stage" id="gallery-stage" role="tabpanel" aria-labelledby="shot-tab-overview">
+            <img class="is-active" data-shot="overview" src="assets/screens/overview.png" width="1307" height="867" loading="lazy" alt="作钓总览页面截图">
+            <img data-shot="fishing" src="assets/screens/fishing.png" width="1307" height="867" loading="lazy" alt="作钓策略页面截图，展示下杆方式、鱼饵下沉和鱼群与咬口卡片">
+            <img data-shot="insights" src="assets/screens/insights.png" width="1307" height="867" loading="lazy" alt="作钓研究页面截图，展示数据来源说明、报警信号与三杆反馈">
+            <img data-shot="services" src="assets/screens/services.png" width="1307" height="867" loading="lazy" alt="交易与补给页面截图，展示 F1 至 F6 服务入口">
+            <img data-shot="narrow" src="assets/screens/narrow.png" width="755" height="570" loading="lazy" alt="窄窗口布局截图，导航缩为图标">
+          </div>
+          <p class="gallery-caption" id="gallery-caption">作钓总览：扫描并连接游戏进程，三支鱼竿的读数与本次作钓状态集中显示。</p>
+        </div>
+        <p class="footnote reveal">截图来自 2.5 版本；2.7.0 已按用途重组导航与页面名称，视觉风格保持一致。</p>
+      </div>
+    </section>
+
+    <section class="section" id="maps" aria-labelledby="maps-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">MAPS · 水域地图</p>
+          <h2 class="section-title" id="maps-title">17 处水域，下一站去哪里</h2>
+          <p class="section-lead">从宁静湖泊到曲折河流，再到开阔海域。浏览地图、标记目标、收藏钓点，让每一次出发都有方向。</p>
+        </header>
+        <div class="map-toolbar reveal">
+          <div class="chips" role="group" aria-label="按水域类型筛选">
+            <button type="button" class="chip" aria-pressed="true" data-filter="all">全部<span data-kind-count="all"></span></button>
+            <button type="button" class="chip" aria-pressed="false" data-filter="lake">湖泊<span data-kind-count="lake"></span></button>
+            <button type="button" class="chip" aria-pressed="false" data-filter="river">河流<span data-kind-count="river"></span></button>
+            <button type="button" class="chip" aria-pressed="false" data-filter="sea">群岛与海域<span data-kind-count="sea"></span></button>
+          </div>
+          <p class="map-hint"><svg class="icon" width="18" height="18"><use href="#i-target"/></svg>点击地图放大预览，试试标记你的目标点</p>
+        </div>
+        <div class="map-grid" id="map-grid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="hotkeys" aria-labelledby="hotkeys-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">HOTKEYS · 快捷键</p>
+          <h2 class="section-title" id="hotkeys-title">全局快捷键，两套方案可选</h2>
+          <p class="section-lead">常用操作，一按即达。选择熟悉的 JF 或原 RF4 方案，沉底、收线、入护与补给不必来回寻找；<kbd>Home</kbd> 随时显示或隐藏工作台。</p>
+        </header>
+        <div class="hotkeys-bar reveal">
+          <div class="segmented" role="group" aria-label="快捷键方案">
+            <button type="button" aria-pressed="true" data-scheme="jf">JF 方案<small>默认</small></button>
+            <button type="button" aria-pressed="false" data-scheme="rf4">原 RF4 方案</button>
+          </div>
+          <p class="hotkeys-note" id="hotkeys-note"></p>
+        </div>
+        <ul class="hotkey-grid" id="hotkey-grid"></ul>
+        <ul class="notes reveal">
+          <li>可在“设置 → 工作台偏好”中切换快捷键方案；每次使用一套方案。</li>
+          <li>Home 在离线时也可显示或隐藏工作台，游戏操作快捷键在连接后可用。</li>
+          <li>快捷键被其他程序占用时会显示提示；本页展示按键对应的功能。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="insights" aria-labelledby="insights-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">DATA · 数据与记录</p>
+          <h2 class="section-title" id="insights-title">每一次作钓，都有迹可循</h2>
+          <p class="section-lead">现场看状态，回头看记录。把三杆反馈、天气环境、鱼种规则与订单物资放在一起，查找和对比都更方便。观察记录保留采集时间，鱼市报价可单独查看。</p>
+        </header>
+        <div class="insight-grid">
+          <article class="insight glass reveal">
+            <span class="insight-tab">现场动态</span>
+            <h3>三杆反馈与实时环境</h3>
+            <p>三杆反馈与提醒集中查看，同时呈现气温、风、雾和天气。当前场景与钓组信息随手可查，重要变化及时留意。</p>
+          </article>
+          <article class="insight glass reveal">
+            <span class="insight-tab">鱼种与规则</span>
+            <h3>鱼种目录与规则预览</h3>
+            <p>汇总已加载水域的鱼种目录，无需先钓到鱼。搜索目标鱼种、查看筛选条件，提前预览保留规则。</p>
+          </article>
+          <article class="insight glass reveal">
+            <span class="insight-tab">作钓记录</span>
+            <h3>采集日记与对比</h3>
+            <p>记录三杆的鱼类观察，以及场景、坐标、时间、天气和钓组类型。按水域与位置汇总对比，支持搜索、分页与完整导出。</p>
+          </article>
+          <article class="insight glass reveal">
+            <span class="insight-tab">订单与物资</span>
+            <h3>订单、背包与鱼市报价</h3>
+            <p>咖啡厅订单的鱼种、水域、最低重量、奖励与到期时间，背包与当前竿轮，以及鱼市逐条报价。需先在游戏中打开对应界面让对象加载。</p>
+          </article>
+        </div>
+        <div class="facts glass reveal">
+          <div class="fact"><strong>实时状态</strong><span>读数带有采集时间，缺失或过期时明确显示，便于判断当前情况。</span></div>
+          <div class="fact"><strong>自动保存</strong><span>作钓观察定期保存，断开后仍可回看已有记录。</span></div>
+          <div class="fact"><strong>搜索与对比</strong><span>从历史观察中找出水域、坐标与天气，比较不同位置的记录。</span></div>
+          <div class="fact"><strong>JSON · CSV</strong><span>完整导出观察日记，方便整理、留存和进一步分析。</span></div>
+        </div>
+        <div class="source-states reveal" aria-label="来源状态">
+          <span class="states-label">来源状态</span>
+          <span class="state" data-state="ok">有效</span>
+          <span class="state" data-state="reading">采集中</span>
+          <span class="state" data-state="waiting">等待采集</span>
+          <span class="state" data-state="unloaded">未加载</span>
+          <span class="state" data-state="invalid">校验失败</span>
+          <span class="state" data-state="stale">过期</span>
+          <span class="state" data-state="offline">离线</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section closing" aria-labelledby="closing-title">
+      <div class="container">
+        <div class="closing-inner reveal">
+          <div class="closing-copy">
+            <p class="eyebrow">EVERYTHING IN ONE WORKSPACE</p>
+            <h2 class="section-title" id="closing-title">从准备到记录，作钓更有条理。</h2>
+            <p>找到顺手的功能，留住值得回访的钓点。</p>
+          </div>
+          <div class="closing-actions">
+            <a class="btn btn-primary" href="#workspace">浏览功能分区<svg class="icon" width="18" height="18"><use href="#i-arrow"/></svg></a>
+            <a class="text-link" href="#maps">探索水域地图<svg class="icon" width="16" height="16"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner glass">
+      <div class="footer-brand">
+        <img src="assets/icon.png" alt="" width="44" height="44" loading="lazy">
+        <div><b>JF Workbench 2.7.0</b><span>Windows x64 作钓工作台</span></div>
+      </div>
+      <p class="footer-credits">作钓控制 · 水域地图 · 三杆状态 · 数据记录</p>
+      <p class="footer-legal">独立第三方工作台，与 Russian Fishing 4 及其开发商无关联。</p>
+      <a class="to-top" href="#top">回到顶部<svg class="icon" width="16" height="16"><use href="#i-arrow"/></svg></a>
+    </div>
+  </footer>
+
+  <div class="palette" id="palette" hidden>
+    <div class="overlay" data-close-palette></div>
+    <div class="palette-box glass" role="dialog" aria-modal="true" aria-label="搜索本页">
+      <div class="palette-input">
+        <svg class="icon" width="20" height="20"><use href="#i-search"/></svg>
+        <input id="palette-input" type="text" role="combobox" aria-expanded="true" aria-controls="palette-list" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="搜索功能、地图或快捷键…" aria-label="搜索功能、地图或快捷键">
+        <kbd>Esc</kbd>
+      </div>
+      <ul class="palette-list" id="palette-list" role="listbox" aria-label="搜索结果"></ul>
+      <div class="palette-foot">
+        <span><kbd>↑</kbd><kbd>↓</kbd>选择</span>
+        <span><kbd>Enter</kbd>前往</span>
+        <span class="pf-tip">搜索本页功能、地图与快捷键</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <div class="overlay" data-close-lightbox></div>
+    <div class="lightbox-box glass" role="dialog" aria-modal="true" aria-labelledby="lb-title">
+      <header class="lb-head">
+        <div>
+          <p class="eyebrow" id="lb-counter"></p>
+          <h3 id="lb-title"></h3>
+          <p class="lb-sub" id="lb-sub" lang="ru"></p>
+        </div>
+        <button class="icon-btn" type="button" data-close-lightbox aria-label="关闭"><svg class="icon" width="20" height="20"><use href="#i-close"/></svg></button>
+      </header>
+      <div class="lb-body">
+        <button class="icon-btn lb-nav" type="button" data-lb-step="-1" aria-label="上一张地图"><svg class="icon" width="22" height="22"><use href="#i-chev-l"/></svg></button>
+        <div class="lb-figure" id="lb-figure">
+          <img id="lb-img" alt="" width="1024" height="1024">
+          <span class="lb-marker" id="lb-marker" hidden></span>
+        </div>
+        <button class="icon-btn lb-nav" type="button" data-lb-step="1" aria-label="下一张地图"><svg class="icon" width="22" height="22"><use href="#i-chev-r"/></svg></button>
+      </div>
+      <footer class="lb-foot">
+        <dl class="lb-meta" id="lb-meta"></dl>
+        <p class="lb-coord" id="lb-coord" aria-live="polite"></p>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
