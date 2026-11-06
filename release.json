@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "app": "rf",
+  "version": "2.7.0",
+  "containerUrl": "https://raw.githubusercontent.com/wzwuwuw/JFWorkbench/rf-core-assets/rf-core.container.json",
+  "file": "rf-core.container.json",
+  "bytes": 1136349,
+  "sha256": "7d94f27ba7e9dc57d07d99febca2b4e92536494404e1e58aaccc87e638abdef8",
+  "plaintextBytes": 851456,
+  "plaintextSha256": "9cdea84a73dbc4ed2739e5c9bb9365c9a6896bc63cf73ffd87b74759cf12e96e",
+  "expiresAt": "2027-02-04T19:29:27.846Z",
+  "algorithm": "ES256+AES-256-GCM",
+  "keyId": "XwnXRnCoup5D4T6aEptOVIktRD6a3bQ7vLnLYT2DGm4",
+  "containsSecrets": false,
+  "containsPlaintextCore": false
+}

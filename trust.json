@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "app": "rf",
+  "algorithm": "ES256",
+  "keyId": "XwnXRnCoup5D4T6aEptOVIktRD6a3bQ7vLnLYT2DGm4",
+  "publicKey": {
+    "kty": "EC",
+    "crv": "P-256",
+    "x": "Oxch6GEtag4VRLPQMudsq5aCkRzlceyChqeJLZiu5Iw",
+    "y": "odUF8_HssIJYoumfQWSAvDlG0AqAQQ7DPbwHULJlJhA",
+    "ext": true,
+    "key_ops": [
+      "verify"
+    ]
+  }
+}
